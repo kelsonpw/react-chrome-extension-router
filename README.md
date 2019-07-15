@@ -13,11 +13,11 @@ npm install --save react-chrome-extension-router
 ## Usage
 
 ```jsx
-import * as React from 'react'
+import * as React from 'react';
+import * as ReactDOM from 'ReactDOM';
+import { Router, Link, goBack, goTo } from 'react-chrome-extension-router';
 
-import { Router, Link, goBack, goTo } from 'react-chrome-extension-router'
-
-const Three = ({ finalMessage }) => <h1>{finalMessage}</h1>
+const Three = ({ finalMessage }) => <h1>{finalMessage}</h1>;
 
 const Two = ({ message }) => (
   <div>
@@ -41,13 +41,15 @@ const One = () => (
   </Link>
 );
 
-const App = () => {
-  return (
-    <Router>
-      <One/>
-    </Router>
-  )
-}
+const App = () => (
+  <Router>
+    <One/>
+  </Router>
+);
+
+render(App, document.getElementById('app'));
+
+[![Edit agitated-satoshi-sccqr](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/agitated-satoshi-sccqr?fontsize=14)
 ```
 
 ## License
