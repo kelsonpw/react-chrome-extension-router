@@ -17,9 +17,9 @@ import * as React from 'react';
 import * as ReactDOM from 'ReactDOM';
 import { Router, Link, goBack, goTo, popToTop } from 'react-chrome-extension-router';
 
-const Three = ({ finalMessage }) => (
-  <div onClick={popToTop}>
-    <h1>{finalMessage}</h1>
+const Three = ({ message }) => (
+  <div onClick={() => popToTop()}>
+    <h1>{message}</h1>
     <p>Click me to pop to the top</p>
   </div>
 );
@@ -34,7 +34,7 @@ const Two = ({ message }) => (
       Click me to go back to component One
     </button>
 
-    <button onClick={() => goTo(Three, { finalMessage: 'I came from component two!' })}>
+    <button onClick={() => goTo(Three, { message })}>
       Click me to go to component Three!
     </button>
   </div>
