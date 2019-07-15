@@ -49,8 +49,8 @@ const App = () => (
 
 render(App, document.getElementById('app'));
 
-[![Edit agitated-satoshi-sccqr](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/agitated-satoshi-sccqr?fontsize=14)
 ```
+[![Edit agitated-satoshi-sccqr](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/agitated-satoshi-sccqr?fontsize=14)
 
 ## License
 
