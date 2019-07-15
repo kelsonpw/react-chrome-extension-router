@@ -1,6 +1,6 @@
 {
   "name": "react-chrome-extension-router",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "A dead simple routing solution for browser extensions",
   "author": "kelsonpw",
   "license": "MIT",
