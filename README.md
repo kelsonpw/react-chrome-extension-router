@@ -15,9 +15,14 @@ npm install --save react-chrome-extension-router
 ```jsx
 import * as React from 'react';
 import * as ReactDOM from 'ReactDOM';
-import { Router, Link, goBack, goTo } from 'react-chrome-extension-router';
+import { Router, Link, goBack, goTo, popToTop } from 'react-chrome-extension-router';
 
-const Three = ({ finalMessage }) => <h1>{finalMessage}</h1>;
+const Three = ({ finalMessage }) => (
+  <div onClick={popToTop}>
+    <h1>{finalMessage}</h1>
+    <p>Click me to pop to the top</p>
+  </div>
+);
 
 const Two = ({ message }) => (
   <div>

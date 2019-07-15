@@ -20,6 +20,11 @@ function goBack(): void {
   forceUpdate && forceUpdate();
 }
 
+function popToTop(): void {
+  stack = new Array();
+  forceUpdate && forceUpdate();
+}
+
 interface ILinkProps {
   id: string;
   component: React.ComponentType<any>;
@@ -88,4 +93,4 @@ function Router({ children }: IRouterProps) {
   return <Component {...props}>{children}</Component>;
 }
 
-export { Router, Link, goBack, goTo, IRouterProps, ILinkProps };
+export { Router, Link, goBack, goTo, IRouterProps, ILinkProps, popToTop };
