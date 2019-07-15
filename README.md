@@ -12,17 +12,41 @@ npm install --save react-chrome-extension-router
 
 ## Usage
 
-```tsx
+```jsx
 import * as React from 'react'
 
-import MyComponent from 'react-chrome-extension-router'
+import { Router, Link, goBack, goTo } from 'react-chrome-extension-router'
 
-class Example extends React.Component {
-  render () {
-    return (
-      <MyComponent />
-    )
-  }
+const Three = ({ finalMessage }) => <h1>{finalMessage}</h1>
+
+const Two = ({ message }) => (
+  <div>
+    This is component Two.
+    I was passed a message:
+    <p>{message}</p>
+
+    <button onClick={() => goBack()}>
+      Click me to go back to component One
+    </button>
+
+    <button onClick={() => goTo(Three, { finalMessage: 'I came from component two!' })}>
+      Click me to go to component Three!
+    </button>
+  </div>
+);
+
+const One = () => (
+  <Link component={Two} props={{ message: 'I came from component one!'}}>
+    This is component One.  Click me to route to component Two
+  </Link>
+);
+
+const App = () => {
+  return (
+    <Router>
+      <One/>
+    </Router>
+  )
 }
 ```
 
