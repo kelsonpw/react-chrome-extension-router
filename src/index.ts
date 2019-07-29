@@ -1,4 +1,5 @@
-import * as React from 'react';
+import * as React from "react";
+import { useForceUpdate } from "./utils";
 
 type RouterStackItem = {
   component: React.ComponentType<any>;
@@ -36,12 +37,12 @@ interface ILinkProps {
 }
 
 function Link({
-  id = '',
+  id = "",
   component,
   children,
   props = {},
-  href = '',
-  className = '',
+  href = "",
+  className = "",
   onClick,
   ...restProps
 }: ILinkProps & React.HTMLProps<HTMLAnchorElement>) {
@@ -59,15 +60,10 @@ function Link({
     [component, props, href, onClick]
   );
 
-  return (
-    <a
-      href={href}
-      className={className}
-      id={id}
-      onClick={onClickHandler}
-      {...restProps}>
-      {children}
-    </a>
+  return React.createElement(
+    "a",
+    { href, className, id, onClick: onClickHandler, ...restProps },
+    children
   );
 }
 
@@ -77,20 +73,20 @@ interface IRouterProps {
 
 const emptyComponent: RouterStackItem = {
   component: ({ children }) => children,
-  props: {},
+  props: {}
 };
 
 function Router({ children }: IRouterProps) {
-  const [, setState] = React.useState<any>({});
+  const update = useForceUpdate();
 
   React.useEffect(() => {
-    forceUpdate = () => setState({});
-  }, [forceUpdate, setState]);
+    forceUpdate = update;
+  }, [update]);
 
   const { component: Component, props } =
     stack[stack.length - 1] || emptyComponent;
 
-  return <Component {...props}>{children}</Component>;
+  return React.createElement(Component, props, children);
 }
 
 export { Router, Link, goBack, goTo, IRouterProps, ILinkProps, popToTop };
