@@ -27,6 +27,10 @@ function popToTop(): void {
   forceUpdate && forceUpdate();
 }
 
+function getCurrent(): RouterStackItem {
+  return stack[stack.length - 1];
+}
+
 interface ILinkProps {
   id: string;
   component: React.ComponentType<any>;
@@ -92,4 +96,13 @@ function Router({ children }: IRouterProps) {
   return React.createElement(Component, props, children);
 }
 
-export { goBack, goTo, popToTop, ILinkProps, IRouterProps, Link, Router };
+export {
+  goBack,
+  getCurrent,
+  goTo,
+  popToTop,
+  ILinkProps,
+  IRouterProps,
+  Link,
+  Router,
+};
