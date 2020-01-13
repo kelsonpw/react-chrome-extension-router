@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -27,7 +27,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "react-chrome-extension-router-v1",
+  "name": "react-chrome-extension-router",
   "author": "Kelson Warner",
   "module": "dist/react-chrome-extension-router-v1.esm.js",
   "devDependencies": {
