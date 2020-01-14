@@ -32,13 +32,13 @@ function getCurrent(): RouterStackItem {
 }
 
 interface ILinkProps {
-  id: string;
+  id?: string;
   component: React.ComponentType<any>;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   props: any;
-  href: string;
-  className: string;
-  onClick: (event: React.SyntheticEvent) => void;
+  href?: string;
+  className?: string;
+  onClick?: (event: React.SyntheticEvent) => void;
 }
 
 function Link({
@@ -65,13 +65,17 @@ function Link({
     [component, props, href, onClick]
   );
 
-  return React.createElement('a', {
-    href,
-    className,
-    id,
-    onClick: onClickHandler,
-    ...restProps,
-  });
+  return React.createElement(
+    'a',
+    {
+      href,
+      className,
+      id,
+      onClick: onClickHandler,
+      ...restProps,
+    },
+    children
+  );
 }
 
 interface IRouterProps {
