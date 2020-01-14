@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -40,5 +40,8 @@
     "tsdx": "^0.12.3",
     "tslib": "^1.10.0",
     "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "@testing-library/react": "^9.4.0"
   }
 }
