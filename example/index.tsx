@@ -1,7 +1,15 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { goBack, goTo, popToTop, Link, Router } from '../src/index';
+import {
+  goBack,
+  goTo,
+  popToTop,
+  Link,
+  Router,
+  getCurrent,
+  getComponentStack,
+} from '../src/index';
 
 const Three = ({ message }: any) => (
   <div onClick={() => popToTop()}>
@@ -31,10 +39,20 @@ const One = () => {
   );
 };
 
-const App = () => (
-  <Router>
-    <One />
-  </Router>
-);
+const App = () => {
+  const { component, props } = getCurrent();
+  console.log(
+    component
+      ? `There is a component on the stack! ${component} with ${props}`
+      : `The current stack is empty so Router's direct children will be rendered`
+  );
+  const components = getComponentStack();
+  console.log(`The stack has ${components.length} components on the stack`);
+  return (
+    <Router>
+      <One />
+    </Router>
+  );
+};
 
 ReactDOM.render(<App />, document.getElementById('root'));

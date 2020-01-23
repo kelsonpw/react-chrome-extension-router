@@ -28,7 +28,11 @@ function popToTop(): void {
 }
 
 function getCurrent(): RouterStackItem {
-  return stack[stack.length - 1];
+  return stack[stack.length - 1] || { component: false, props: null };
+}
+
+function getComponentStack(): RouterStackItem[] {
+  return stack;
 }
 
 interface ILinkProps {
@@ -52,7 +56,7 @@ function Link({
   ...restProps
 }: ILinkProps & React.HTMLProps<HTMLAnchorElement>) {
   const onClickHandler = React.useCallback(
-    evt => {
+    (evt: React.SyntheticEvent) => {
       evt.preventDefault();
       if (component) {
         goTo(component, props);
@@ -83,11 +87,11 @@ interface IRouterProps {
 }
 
 const emptyStackComponent: RouterStackItem = {
-  component: ({ children }) => children,
+  component: ({ children }: any) => children,
   props: {},
 };
 
-function Router({ children }: IRouterProps) {
+function Router({ children }: any) {
   const update = useForceUpdate();
 
   React.useEffect(() => {
@@ -103,6 +107,7 @@ function Router({ children }: IRouterProps) {
 export {
   goBack,
   getCurrent,
+  getComponentStack,
   goTo,
   popToTop,
   ILinkProps,
