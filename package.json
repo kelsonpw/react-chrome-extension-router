@@ -31,6 +31,7 @@
   "author": "Kelson Warner",
   "module": "dist/react-chrome-extension-router-v1.esm.js",
   "devDependencies": {
+    "@testing-library/dom": "^7.28.1",
     "@types/jest": "^24.0.25",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
@@ -39,9 +40,7 @@
     "react-dom": "^16.12.0",
     "tsdx": "^0.12.3",
     "tslib": "^1.10.0",
-    "typescript": "^3.7.4"
-  },
-  "dependencies": {
+    "typescript": "^3.7.4",
     "@testing-library/react": "^9.4.0"
   }
 }
