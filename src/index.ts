@@ -35,14 +35,15 @@ function getComponentStack(): RouterStackItem[] {
   return stack;
 }
 
-interface ILinkProps {
+interface LinkProps {
   id?: string;
   component: React.ComponentType<any>;
   children?: React.ReactNode;
-  props: any;
+  props?: any;
   href?: string;
   className?: string;
-  onClick?: (event: React.SyntheticEvent) => void;
+  tag?: React.ComponentType<any> | keyof JSX.IntrinsicElements;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 function Link({
@@ -52,11 +53,12 @@ function Link({
   props = {},
   href = '',
   className = '',
+  tag = 'a',
   onClick,
   ...restProps
-}: ILinkProps & React.HTMLProps<HTMLAnchorElement>) {
+}: LinkProps & React.HTMLProps<HTMLElement>) {
   const onClickHandler = React.useCallback(
-    (evt: React.SyntheticEvent) => {
+    (evt: React.MouseEvent<HTMLAnchorElement>) => {
       evt.preventDefault();
       if (component) {
         goTo(component, props);
@@ -70,7 +72,7 @@ function Link({
   );
 
   return React.createElement(
-    'a',
+    tag,
     {
       href,
       className,
@@ -82,7 +84,7 @@ function Link({
   );
 }
 
-interface IRouterProps {
+interface RouterProps {
   children: React.ReactNode;
 }
 
@@ -91,7 +93,7 @@ const emptyStackComponent: RouterStackItem = {
   props: {},
 };
 
-function Router({ children }: any) {
+function Router({ children }: RouterProps) {
   const update = useForceUpdate();
 
   React.useEffect(() => {
@@ -110,8 +112,8 @@ export {
   getComponentStack,
   goTo,
   popToTop,
-  ILinkProps,
-  IRouterProps,
+  LinkProps,
+  RouterProps,
   Link,
   Router,
 };

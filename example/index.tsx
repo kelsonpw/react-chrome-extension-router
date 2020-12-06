@@ -9,7 +9,7 @@ import {
   Router,
   getCurrent,
   getComponentStack,
-} from '../src/index';
+} from 'react-chrome-extension-router';
 
 const Three = ({ message }: any) => (
   <div onClick={() => popToTop()}>
@@ -40,14 +40,23 @@ const One = () => {
 };
 
 const App = () => {
-  const { component, props } = getCurrent();
-  console.log(
-    component
-      ? `There is a component on the stack! ${component} with ${props}`
-      : `The current stack is empty so Router's direct children will be rendered`
-  );
-  const components = getComponentStack();
-  console.log(`The stack has ${components.length} components on the stack`);
+  const logComponentStack = React.useCallback(() => {
+    const { component, props } = getCurrent();
+    console.log(
+      component
+        ? `There is a component on the stack! ${component} with ${props}`
+        : `The current stack is empty so Router's direct children will be rendered`
+    );
+    const components = getComponentStack();
+    console.log(`The stack has ${components.length} components on the stack`);
+  }, []);
+
+  React.useEffect(() => {
+    const timeoutId = setTimeout(logComponentStack, 5000);
+
+    return () => clearTimeout(timeoutId);
+  }, [logComponentStack]);
+
   return (
     <Router>
       <One />
