@@ -55,8 +55,7 @@ const One = () => {
 
 const App = () => {
   useEffect(() => {
-    setInterval(() => {
-        const { component, props } = getCurrent();
+      const { component, props } = getCurrent();
       console.log(
         component
           ? `There is a component on the stack! ${component} with ${props}`
@@ -64,7 +63,6 @@ const App = () => {
       );
       const components = getComponentStack();
       console.log(`The stack has ${components.length} components on the stack`);
-    }, 500);
   });
   return (
     <Router>
