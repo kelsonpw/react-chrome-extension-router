@@ -23,7 +23,7 @@ import {
   Router,
   getCurrent,
   getComponentStack,
-} from '../src/index';
+} from 'react-chrome-extension-router';
 
 const Three = ({ message }: any) => (
   <div onClick={() => popToTop()}>
