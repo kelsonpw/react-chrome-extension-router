@@ -8,7 +8,11 @@ type RouterStackItem = {
 
 let stack: RouterStackItem[] = [];
 
-let forceUpdate: Function;
+let forceUpdateStack: Array<Function> = [];
+
+function forceUpdate() {
+  forceUpdateStack.forEach(fn => fn());
+}
 
 function goTo(comp: React.ComponentType<any>, props: any = {}): void {
   stack.push({ component: comp, props });
@@ -84,6 +88,67 @@ function Link({
   );
 }
 
+interface NavLinkProps {
+  id?: string;
+  component: React.ComponentType<any>;
+  children?: React.ReactNode;
+  props?: any;
+  href?: string;
+  className?: string;
+  activeClassName?: string;
+  tag?: React.ComponentType<any> | keyof JSX.IntrinsicElements;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+}
+
+function NavLink({
+  id = '',
+  component,
+  children,
+  props = {},
+  href = '',
+  className = '',
+  activeClassName = '',
+  tag = 'a',
+  onClick,
+  ...restProps
+}: NavLinkProps & React.HTMLProps<HTMLElement>) {
+  const onClickHandler = React.useCallback(
+    (evt: React.MouseEvent<HTMLAnchorElement>) => {
+      evt.preventDefault();
+      if (component) {
+        goTo(component, props);
+      }
+      if (!component && href) {
+        window.open(href);
+      }
+      onClick && onClick(evt);
+    },
+    [component, props, href, onClick]
+  );
+
+  const update = useForceUpdate();
+
+  React.useEffect(() => {
+    forceUpdateStack.push(update);
+  }, [update]);
+
+  if (stack.length > 0 && stack[stack.length - 1].component === component) {
+    className = activeClassName + ' ' + className;
+  }
+
+  return React.createElement(
+    tag,
+    {
+      href,
+      className,
+      id,
+      onClick: onClickHandler,
+      ...restProps,
+    },
+    children
+  );
+}
+
 interface RouterProps {
   children: React.ReactNode;
 }
@@ -97,7 +162,7 @@ function Router({ children }: RouterProps) {
   const update = useForceUpdate();
 
   React.useEffect(() => {
-    forceUpdate = update;
+    forceUpdateStack.push(update);
   }, [update]);
 
   const { component: Component, props } =
@@ -115,5 +180,6 @@ export {
   LinkProps,
   RouterProps,
   Link,
+  NavLink,
   Router,
 };
