@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.3.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -49,6 +49,7 @@
   "module": "dist/react-chrome-extension-router-v1.esm.js",
   "devDependencies": {
     "@testing-library/dom": "^7.28.1",
+    "@testing-library/react": "^9.4.0",
     "@types/jest": "^24.0.25",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
@@ -57,7 +58,6 @@
     "react-dom": "^16.12.0",
     "tsdx": "^0.12.3",
     "tslib": "^1.10.0",
-    "typescript": "^3.7.4",
-    "@testing-library/react": "^9.4.0"
+    "typescript": "^3.7.4"
   }
 }
