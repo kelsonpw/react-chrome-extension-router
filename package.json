@@ -28,7 +28,24 @@
     "trailingComma": "es5"
   },
   "name": "react-chrome-extension-router",
+  "description": "A dead simple routing solution for browser extensions using React",
+  "keywords": [
+    "react",
+    "react-router",
+    "router",
+    "react router",
+    "chrome",
+    "browser",
+    "extension",
+    "chrome-extension",
+    "micro router",
+    "micro react router"
+  ],
   "author": "Kelson Warner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kelsonpw/react-chrome-extension-router.git"
+  },
   "module": "dist/react-chrome-extension-router-v1.esm.js",
   "devDependencies": {
     "@testing-library/dom": "^7.28.1",
