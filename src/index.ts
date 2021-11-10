@@ -8,7 +8,22 @@ type RouterStackItem = {
 
 let stack: RouterStackItem[] = [];
 
-let forceUpdateStack: Array<Function> = [];
+let forceUpdateStack: (() => void)[] = [];
+
+function useForceUpdateStack(): void {
+  const update = useForceUpdate();
+
+  React.useEffect(() => {
+    forceUpdateStack.push(update);
+
+    return () => {
+      const index = forceUpdateStack.indexOf(update);
+      if (index > -1) {
+        forceUpdateStack.splice(index, 1);
+      }
+    };
+  }, [update]);
+}
 
 function forceUpdate() {
   forceUpdateStack.forEach(fn => fn());
@@ -16,19 +31,19 @@ function forceUpdate() {
 
 function goTo(comp: React.ComponentType<any>, props: any = {}): void {
   stack.push({ component: comp, props });
-  forceUpdate && forceUpdate();
+  forceUpdate();
 }
 
 function goBack(): void {
   if (stack.length) {
     stack.pop();
   }
-  forceUpdate && forceUpdate();
+  forceUpdate();
 }
 
 function popToTop(): void {
   stack = [];
-  forceUpdate && forceUpdate();
+  forceUpdate();
 }
 
 function getCurrent(): RouterStackItem {
@@ -126,11 +141,7 @@ function NavLink({
     [component, props, href, onClick]
   );
 
-  const update = useForceUpdate();
-
-  React.useEffect(() => {
-    forceUpdateStack.push(update);
-  }, [update]);
+  useForceUpdateStack();
 
   if (stack.length > 0 && stack[stack.length - 1].component === component) {
     className = activeClassName + ' ' + className;
@@ -159,11 +170,7 @@ const emptyStackComponent: RouterStackItem = {
 };
 
 function Router({ children }: RouterProps) {
-  const update = useForceUpdate();
-
-  React.useEffect(() => {
-    forceUpdateStack.push(update);
-  }, [update]);
+  useForceUpdateStack();
 
   const { component: Component, props } =
     stack[stack.length - 1] || emptyStackComponent;
