@@ -46,7 +46,7 @@
     "type": "git",
     "url": "https://github.com/kelsonpw/react-chrome-extension-router.git"
   },
-  "module": "dist/react-chrome-extension-router-v1.esm.js",
+  "module": "dist/react-chrome-extension-router.esm.js",
   "devDependencies": {
     "@testing-library/dom": "^7.28.1",
     "@testing-library/react": "^9.4.0",
